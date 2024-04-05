@@ -7,7 +7,6 @@ import section02 from "../../assets/section02.png";
 import { Plus, Minus } from "lucide-react";
 
 const Home = () => {
-
   const [openIndex, setOpenIndex] = useState(0);
 
   const faqToggle = (index) => {
@@ -150,7 +149,7 @@ const Home = () => {
             >
               <div className="flex items-center justify-between">
                 <p className="text-xl text-[#6B3CC9]">
-                Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
+                  Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
                 </p>
                 {openIndex === index ? <Minus /> : <Plus />}
               </div>
