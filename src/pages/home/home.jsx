@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import bannerImage from "../../assets/bannerImage.png";
@@ -7,6 +7,14 @@ import section02 from "../../assets/section02.png";
 import { Plus, Minus } from "lucide-react";
 
 const Home = () => {
+
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const faqToggle = (index) => {
+    // Toggle the open/close state of the clicked FAQ item
+    setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
     <div>
       <Header />
@@ -18,7 +26,8 @@ const Home = () => {
         />
         <div className="bg-gradient-to-r from-[#4dca79] to-[#1cbddd] flex flex-col lg:max-w-[500px] py-5 px-7 lg:absolute bottom-10 left-14">
           <p className="text-4xl relative top-0 text-white font-semibold">
-            We Crush Your <br />Competitors, Goals, And Sales Records - Without The B.S.
+            We Crush Your <br />
+            Competitors, Goals, And Sales Records - Without The B.S.
           </p>
           <button className="bg-[#F28D35] text-white p-2 max-w-[220px] cursor-pointer rounded-md font-semibold tracking-widest mt-5 text-sm">
             GET FREE CONSULTATION
@@ -27,7 +36,7 @@ const Home = () => {
       </div>
 
       {/* section 01 */}
-      <div className="grid grid-cols-12 lg:gap-20 lg:mt-10 max-w-4xl mx-auto">
+      <div className="grid grid-cols-12 lg:gap-20 lg:mt-5 max-w-4xl mx-auto">
         <div className="col-span-12 md:col-span-5 mx-auto">
           <img
             src={section01}
@@ -78,51 +87,84 @@ const Home = () => {
       </div>
 
       {/* FAQ */}
-      <div className="mt-20 mb-20 max-w-2xl mx-auto">
-        <h2 className="text-3xl text-[#6B3CC9] font-semibold text-center tracking-wide">
+      {/* <div className="mt-20 mb-20 max-w-2xl mx-auto">
+        <h2 className="text-3xl text-[#6B3CC9] font-semibold text-center tracking-wide px-5 md:px-5">
           Frequently asked questions
         </h2>
 
         <div className="mt-9 space-y-4 mx-5 md:mx-0">
-          <div className="bg-[#faf8ff] rounded-md p-5">
+          <div className="bg-[#faf8ff] rounded-md p-5 faq" onClick={faqToggle}>
             <div className="flex items-center justify-between cursor-pointer">
               <p className="text-xl text-[#6B3CC9]">
                 Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
               </p>
-              <Plus />
+              {!isFAQOpen ? <Minus /> : <Plus />}
             </div>
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-slate-500 faq-answer">
               Lorem ipsum dolor sit amet consectetur. Faucibus commodo suscipit
               id ipsum. Elementum ultrices nulla faucibus odio est sed aliquam.
               Sapien massa morbi risus sagittis tortor integer.
             </p>
           </div>
-          <div className="bg-[#faf8ff] rounded-md p-5">
+          <div className="bg-[#faf8ff] rounded-md p-5 faq" onClick={faqToggle}>
             <div className="flex items-center justify-between cursor-pointer">
               <p className="text-xl text-[#6B3CC9]">
                 Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
               </p>
-              <Plus />
+              {!isFAQOpen ? <Minus /> : <Plus />}
             </div>
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-slate-500 hidden faq-answer">
               Lorem ipsum dolor sit amet consectetur. Faucibus commodo suscipit
               id ipsum. Elementum ultrices nulla faucibus odio est sed aliquam.
               Sapien massa morbi risus sagittis tortor integer.
             </p>
           </div>
-          <div className="bg-[#faf8ff] rounded-md p-5">
+          <div className="bg-[#faf8ff] rounded-md p-5 faq" onClick={faqToggle}>
             <div className="flex items-center justify-between cursor-pointer">
               <p className="text-xl text-[#6B3CC9]">
                 Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
               </p>
-              <Plus />
+              {!isFAQOpen ? <Minus /> : <Plus />}
             </div>
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-slate-500 hidden faq-answer">
               Lorem ipsum dolor sit amet consectetur. Faucibus commodo suscipit
               id ipsum. Elementum ultrices nulla faucibus odio est sed aliquam.
               Sapien massa morbi risus sagittis tortor integer.
             </p>
           </div>
+        </div>
+      </div> */}
+
+      {/* FAQ */}
+      <div className="mt-20 mb-20 max-w-2xl mx-auto">
+        <h2 className="text-3xl text-[#6B3CC9] font-semibold text-center tracking-wide px-5 md:px-5">
+          Frequently asked questions
+        </h2>
+
+        <div className="mt-9 space-y-4 mx-5 md:mx-0">
+          {[...Array(3)].map((_, index) => (
+            <div
+              key={index}
+              className="bg-[#faf8ff] rounded-md p-5 faq cursor-pointer"
+              onClick={() => faqToggle(index)}
+            >
+              <div className="flex items-center justify-between">
+                <p className="text-xl text-[#6B3CC9]">
+                Lorem ipsum dolor sit amet consectetur. Leo at sit eu libero?
+                </p>
+                {openIndex === index ? <Minus /> : <Plus />}
+              </div>
+              <p
+                className={`mt-2 text-slate-500 faq-answer ${
+                  openIndex === index ? "" : "hidden"
+                }`}
+              >
+                Lorem ipsum dolor sit amet consectetur. Faucibus commodo
+                suscipit id ipsum. Elementum ultrices nulla faucibus odio est
+                sed aliquam. Sapien massa morbi risus sagittis tortor integer.
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
